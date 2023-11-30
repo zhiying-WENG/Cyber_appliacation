@@ -1,13 +1,11 @@
 </main>
 <footer>
-    <p>Footer</p>
+    <p>Transfer MVC PHP Application</p>
 </footer>
 
 <!-- icon -->
-<!-- <script src="https://unpkg.com/feather-icons"></script> -->
+<script src="https://unpkg.com/feather-icons"></script>
 
 <script src="/js/script.js"></script>
-<script src="/js/password.js"></script>
 </body>
-
 </html>

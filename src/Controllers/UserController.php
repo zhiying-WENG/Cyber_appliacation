@@ -50,7 +50,7 @@ class UserController extends AbstractController
             $error[] = 'email already exists !';
 
         $passwordService = new Password();
-        if (!$passwordService->checkPasswordStrength($userForm['password'])) {
+        if(!$passwordService->checkPasswordStrength($userForm['password'])){
             $error[] = 'password weak';
         }
 

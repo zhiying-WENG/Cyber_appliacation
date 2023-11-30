@@ -2,20 +2,20 @@
 
 <h2>Login</h2>
 
+<div class="mb-3">
 <form action="/login_check" method="post">
-    <div>
         <label>
-            Email:
+            Email :
             <input type="email" name="email" required <?php if (isset($email)): ?>value='<?= htmlspecialchars($email) ?>'<?php endif; ?> />
         </label>
-    </div>
     <div>
         <label>
             Password:
-            <input type="password" name="password" required />
-            <div class="password-icon">
-            <i data-feather="eye"></i>
-            <i data-feather="eye-off"></i>
+            <input id="password" type="password" name="password" required />
+            <div id="icon-eye" class="password-icon">
+                <i id="icon-eye-on" data-feather="eye"></i>
+                <i id="icon-eye-off" data-feather="eye-off"></i>
+            </div>
         </label>
     </div>
     <div>
@@ -23,6 +23,7 @@
     </div>
     <input type="hidden" name="csrf" value="<?= $csrf ?? '' ?>" />
 </form>
+</div>
 
 <div>
     <?php if (isset($error)): ?>

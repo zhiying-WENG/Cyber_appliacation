@@ -1,4 +1,4 @@
-//feather.replace();
+feather.replace();
 
 function checkFile(quota, maxSize) {
   const fileInput = document.getElementById('images');
@@ -24,10 +24,11 @@ function checkFile(quota, maxSize) {
     document.getElementById("button").disabled = true;
     return;
   }
-
+  
   if (fileSize < maxSize && fileSize < quotaInBytes) {
     error.style.display = "none";
     document.getElementById("button").disabled = false;
   }
 }
 
+ 

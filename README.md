@@ -1,84 +1,44 @@
-# Transfer MVC
+# WCS-Cyber-Projet2
 
-## Description
+The objective of this project is the development and deployment of a secure file download application in Php MVC model (https://fr.wikipedia.org/wiki/Mod%C3%A8le-vue-contr% C3% B4their)
 
-This project is a base for the development of a PHP MVC application.
+For installation instructions, navigate to the file [INSTALL.md]
 
-## Pre-requisites
+## Table of contents
+#### Contributors
+#### The project 
+#### Constraint
+#### Functionality
+#### Security
 
-To install the project, you need to have the following tools installed on your computer:
+## Contributors
+Bilel, Katia, Kelyan, Zhiying
 
-- PHP 8.1 or higher
-- Composer
+### Roles
+The project was under the supervision of Romain Garcia.
 
-You also need to activate the following PHP extensions:
+Katia, Zhiying, Kelyan and Bilel took on the role of developers. Kelyan also took on the role of lead developer during the project. 
 
-- pdo_mysql
-- zip
-- intl
-- curl
+Each project feature was assigned to a specific person. We set up a Trello board for better organization and held daily meetings to monitor everyone's progress.
 
-## Installation
+## The project
 
-To install the project, you need to clone the repository and install the dependencies with composer.
+This is the second pedagogical project in the cybersecurity developer course, with the aim of putting into practice the skills acquired in the second part of the course.
 
-```bash
-git clone https://github.com/Secureaks/TransferMVC.git
-cd TransferMVC
-composer install
-```
+- Develop a secure file-sharing web application
+- Deploy a web application with a database
+- Carry out a project as part of a team
+- Document all stages
 
-## Configuration
+### Pre-requisites
 
-Once the project is installed, you need to configure the application and the database connection. To do so, you need
-to copy the files `config/app.dist.php` and `config/database.dist.php` to `config/app.php` and `config/database.php`:
+- [Apache](https://doc.ubuntu-fr.org/apache2#installation) Server version: Apache/2.4.52 (Ubuntu)
+- [PHP](https://doc.ubuntu-fr.org/php#installation) Version 8.1.2-1
+- [MySQL](https://doc.ubuntu-fr.org/mysql#installation) Version 8.0.33-0
 
-```bash
-cp config/app.dist.php config/app.php
-cp config/database.dist.php config/database.php
-```
+See INSTALL.md for more.
 
-Then you need to edit the files `config/app.php` and `config/database.php` to set the correct values.
-
-## Docker MySQL
-
-If you need a MySQL database for the project development, you can use the following command to start a MySQL server
-in a Docker:
-
-```bash
-docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=db-password mysql
-```
-
-Then you need to create a database with the name of your choice, and a user with a password. Then, you can grant to
-this user all privileges on the database.
-
-```bash
-mariadb -h 127.0.0.1 -u root -p
-```
-
-```sql
-CREATE DATABASE database_name;
-CREATE USER 'username'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'%';
-```
-
-If you need to import a SQL file, you can use the following command:
-
-```bash
-mariadb -h 127.0.0.1 -D database -u root -p < setup/database.sql
-```
-
-## Dev server
-
-To start the application, you can use the following command:
-
-```bash
-php -S localhost:8000 -t public
-```
-
-Then you can open the following URL in your browser: http://localhost:8000
-
-## Application structure
+### Application structure
 
 The application is structured as follows:
 
@@ -98,132 +58,61 @@ The application uses the following libraries:
 - symfony/http-foundation: To manage HTTP requests and responses
 - phroute/phroute: To manage the routing of the application
 
-### Router
+## Constraint
 
-The router is managed in the file `src/Router/router.php`. It is configured to use the controllers. You need to add
-the routes of your application in this file.
+- Language is PHP (minimum 8.1)
+- MVC architecture
+- No framework, but certain libraries may be used after validation by the trainer 
+- MariaDB or MySQL database
+- Ubuntu 22.04 LTS Linux server
+- Apache web server
 
-Example:
+## Functionality
 
-```php
-// Simple route with a controller and a method corresponding to the URL /
-$router->get('/', function () {
-    $controller = new HomeController();
-    $controller->index();
-});
+**For users who are not logged in, you will need to offer the following functions:**
 
-// Route with a parameter (id) and a controller and a method corresponding to the URL /model/{id}
-// the parameter is passed to the method
-$router->get('/model/{id}', function ($id) {
-    $controller = new HomeController();
-    $controller->getModel($id);
-});
-```
+- Home page
+- Registration (must be protected against mass user creation attacks)
+- Access to shared files via a public share link
+  - Links must be unique and non-guessable
+- File download
+- Option to enter a password to download the file (if the link is protected)
+- Option to add a comment to the file
 
-### Controllers
+**For logged-in users, the following functions should be available:**
 
-The controllers are located in the directory `src/Controllers`. They are used to manage the requests and the responses
-of the application. They are called by the router.
+- Login / Logout
+- Dashboard
+  - Information on user status (storage space used, total storage space, storage quota, paid or free)
+  - List of files shared by and with the user
+    - File name (with download link)
+    - File size
+    - Date created
+    - File management button
 
-Example of a method in a controller:
+## Security
 
-```php
-    public function index(): Response
-    {
-        // Get the name parameter from the request thanks to the http-foundation library
-        // the request parameter is part of the parent AbstractController class and corresponds to the Request
-        // object of the http-foundation library
-        $name = $this->request->get('name', 'World');
-        
-        // We create a response with the rendered view. The render method is part of the parent AbstractController
-        // and build the HTML content to display from the views of the application located in the Views directory
-        $response = new Response(
-            $this->render('Home/index', [
-                'name' => $name,
-            ])
-        );
+### File upload security
 
-        // We then return the response that will be sent to the user's browser
-        return $response->send();
-    }
-```
+This application project must implement essential security measures to guarantee data protection and prevent vulnerabilities. Here is an overview of the main security measures implemented:
 
-### Models
+- **File type validation**: Uploaded files are checked for type to avoid code injections.
+- **File size limitation**: File sizes are limited for security reasons.
+- **Secure storage**: Files are stored outside the web root to prevent direct downloading.
+- **Authentication and authorisation**: Implements an authentication and password system to control uploads and access to certain files.
 
-The models are located in the directory `src/Models`. They are used to interact with the database. They are called by
-the controllers.
+### Login and Registration Security
 
-Example of a controller calling data through a model:
+ **Password strength check**: Requirement for strong passwords
+- **Secure password storage** : User passwords are stored securely using hashes.
+- **Validation of user data**: Validation of user data entered during registration and login.
+- **Protection against SQL injection attacks**: Use of prepared queries to prevent SQL injections.
+- **Protection of personal information**: Users' personal information is stored and managed in accordance with data protection regulations (RGPD, etc.).
 
-```php
-public function getModel($id): Response
-{
-    // Instantiate the model Example from the Models directory and call the method get with the parameter $id provided
-    // by the router. The method get will return an array with the data corresponding to the id in the database
-    // Here we cast the id to an int because this is what the method get is expecting
-    $model = new Example();
-    $model->get((int)$id);
+### General security 
 
-    // We create a response with the rendered view.
-    $response = new Response(
-        $this->render('Home/index', [
-            'model' => $model,
-        ])
-    );
-
-    // We then return the response that will be sent to the user's browser
-    return $response->send();
-}
-```
-
-The models are using PDO to interact with the database. The PDO object is instantiated in the parent AbstractModel.
-
-Example of a model method:
-
-```php
-    public function get(int $id): array|bool
-    {
-        // We prepare the SQL query with a parameter (:id) that will be replaced by the value of the variable $id
-        // We then execute the query
-        $query = $this->pdo->prepare('SELECT * FROM example WHERE id = :id');
-        $query->bindParam(':id', $id, PDO::PARAM_INT);
-        $query->execute();
-        
-        // We return the result of the query as an associative PHP array
-        return $query->fetch(PDO::FETCH_ASSOC);
-    }
-```
-
-### Views
-
-The views are located in the directory `src/Views`. They are used to display the HTML content to the user. They are
-called by the controllers.
-
-Example of a view:
-
-```php
-<!-- We include the base HTML header of the application (the top of the content) -->
-<?php include_once __DIR__ . '/../Commons/base_header.php'; ?>
-
-<p>Home</p>
-
-<!-- If the variable $name is set, we display the content of the variable -->
-<?php if (isset($name)): ?>
-    <p>Hello <?= htmlspecialchars($name, ENT_QUOTES) ?>!</p>
-<?php endif; ?>
-
-<!-- We include the base HTML footer of the application (the bottom of the content) -->
-<?php include_once __DIR__ . '/../Commons/base_footer.php'; ?>
-```
-
-### Services
-
-The services are located in the directory `src/Services`. They are used to manage other classes of the application.
-
-## License
-
-This code is licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-## Author
-
-This code was written by Romain Garcia for [Secureaks](https://www.secureaks.com).
+- **Security audits**: Regular audits are carried out to identify and correct vulnerabilities.
+- **Protection against XSS**: Validation and escape of user data to prevent the injection of malicious code. 
+- **Protection against CSRF attacks**: Use of CSRF tokens to prevent Cross-Site Request Forgery attacks.
+- **Regular updates** : The dependencies and libraries used are regularly updated to correct vulnerabilities.
+- **Secure error management**: error messages can be customised to prevent sensitive information from being disclosed.

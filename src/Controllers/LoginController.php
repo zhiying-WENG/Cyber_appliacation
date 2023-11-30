@@ -36,10 +36,6 @@ class LoginController extends AbstractController
 
         $model = new User();
         $user = $model->getByEmail($email);
-        /* 
-                if (!$user) {
-                    return $this->errorForm('Email or password incorrect', $email);
-                } */
 
         if (!$user || !password_verify($password, $user['password'])) {
             return $this->errorForm('Email or password incorrect', $email);

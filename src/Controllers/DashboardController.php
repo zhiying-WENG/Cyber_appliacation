@@ -47,7 +47,7 @@ class DashboardController extends AbstractController
         $commentModel = new Comment();
         
         $comments = $commentModel->getByFile($file['id']);
-        
+
         $response = new Response(
             $this->render('Dashboard/show', [
                 "file" => $file,

@@ -12,34 +12,24 @@
     <div>
         <label>
             Password:
-            <input type="password" name="password" id="pwd" required />
-            <div class="password-icon" id="eye">
-                <!--                 <i data-feather="eye"></i>
-                <i data-feather="eye-off"></i> -->
-                <img id="eyePwd" src="/img/eyeOff.jpg">
-            </div>
+            <input id="pwd" type="password" name="password" required />
         </label>
     </div>
-    <p id="pwdLog"></p>
+    <div id="pwdLog"></div>
     <div id="pwdBlock">
         <div id="pwdLevel">
-            <span id="block1">weak</span>
-            <span id="block2">medium</span>
-            <span id="block3">strong</span>
+            <span id="block1">&nbsp;</span>
+            <span id="block2">&nbsp;</span>
+            <span id="block3">&nbsp;</span>
         </div>
     </div>
     <div>
         <label>
             Password confirmation:
-            <input type="password" name="password_confirm" id="pwdConfirm" required />
-            <div class="password-icon">
-                <!--                 <i data-feather="eye"></i>
-                <i data-feather="eye-off"></i> -->
-                <img id="eyePwdConfirm" src="/img/eyeOff.jpg">
-            </div>
+            <input id="pwdConfirm" type="password" name="password_confirm" required />
         </label>
     </div>
-    <p id="pwdConfirmLog"></p>
+    <div id="pwdConfirmLog"></div>
     <div>
         <label>
             Lastname:

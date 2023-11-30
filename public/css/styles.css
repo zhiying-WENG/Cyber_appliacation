@@ -3,6 +3,14 @@ body {
   font-family: 'Raleway', sans-serif;
   text-align: center;
   display: grid;
+  border: 1px solid azure;
+  padding: 50px;
+  box-shadow: 5px 7px 23px -1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 5px 7px 23px -1px #9b9b9b;
+  -moz-box-shadow: 5px 7px 23px -1px rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+  background-color: #dbdbdb82;
+  min-height: 800px;
 }
 
 ul {
@@ -109,7 +117,7 @@ li a:after {
 }
 
 li:hover a:after {
-  border-color: gray transparent transparent transparent;
+  border-color: grey transparent transparent transparent;
   transition: all .4s;
 }
 
@@ -136,7 +144,7 @@ li:hover a:after {
 .selected {
   top: -20px;
   color: black;
-  background-color: gray;
+  background-color: grey;
   box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.7);
   transition: all .4s;
 }
@@ -151,9 +159,21 @@ a.fun {
 }
 
 /**********************/
+#pwdBlock,
+#pwdLog,
+#pwdConfirmLog {
+  width: 400px;
+}
+
+#pwdBlock, #pwdConfirmLog {
+  margin: auto;
+}
+
 #pwdLevel span {
   display: none;
   width: 100px;
+  height: 15px;
+  margin: 4px 2px;
   text-align: center;
   color: white;
   border: 1px solid white;
@@ -164,7 +184,7 @@ a.fun {
 }
 
 #block2 {
-  background-color: #23136a;
+  background-color: #eb772f;
 }
 
 #block3 {
