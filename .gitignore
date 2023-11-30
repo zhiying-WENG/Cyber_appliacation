@@ -1,0 +1,6 @@
+.idea/
+vendor/
+var/
+config/database.php
+config/app.php
+Doc K.md
